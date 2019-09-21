@@ -1,11 +1,13 @@
 function main() {
 
+    var imgUrl = 'data/img/001.png';
+
     var svgContainer = d3.select("#workspace")
         .append("svg")
-        .attr("width", "800")
-        .attr("height", "800");
+        .attr("width", "1280")
+        .attr("height", "900");
     svgContainer.append("image")
-        .attr("xlink:href", "https://www.gravatar.com/avatar/145d1d785af3ea2bf9f803cc08c2413a?s=80");
+        .attr("xlink:href", imgUrl);
 
     console.log(jsonSample);
 
