@@ -1,3 +1,4 @@
+// https://jsfiddle.net/GunnerSS/7fvtcLrw/
 var lineData = [{"Y": 10, "X": 10}, {"Y": 100, "X": 100}];
 
 var linePathGenerator = d3.svg.line()
