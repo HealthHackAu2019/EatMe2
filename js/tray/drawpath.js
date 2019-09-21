@@ -5,16 +5,21 @@ function drawPath(svgContainer, lineData)
 {
     var linePathGenerator = d3.line()
         .x(function(d) { return d[0]; })
-        .y(function(d) { return d[1]; });
+        .y(function(d) { return d[1]; })
+        .curve(d3.curveLinear);
 
     //check to see if SVG Path Mini-Language Instructions are generated
     linePathGenerator(lineData);
 
     var svgPath = svgContainer
         .append("path")
-        .attr("stroke", "blue")
-        .attr("stroke-width", "4px")
-        .attr("fill", "none");
+        .attr("stroke", "red")
+        .attr("stroke-width", "2px")
+        .attr("fill-opacity", ".4")
+        .attr("fill", "red");
 
     svgPath.attr("d", linePathGenerator(lineData));
+
+    // BTW: d3 can compute area too
+
 }
