@@ -16,22 +16,22 @@ function drawTrayWithOverlay(targetElement, trayIdx) {
     const origW = 1224;
     const origH = 946;
 
-    var imgUrl = 'data/img/' + trayIdx + '.png';
-    var trayData = window['tray_' + trayIdx];
+    let imgUrl = 'data/img/' + trayIdx + '.png';
+    let trayData = window['tray_' + trayIdx];
 
     // bounding box of tray
-    var bb = trayData.bbox;
+    let bb = trayData.bbox;
 
-    var svg = d3.select(targetElement)
+    let svg = d3.select(targetElement)
         .append("svg")
         .style('border', 'black solid')
         .attr("width", svgW)
         .attr("height", svgH);
 
     // transform so tray fills the SVG
-    var scale = Math.min(svgW / bb.w, svgH / bb.h); // TODO correct??
-    var dx = -bb.x * scale;
-    var dy = -bb.y * scale;
+    let scale = Math.min(svgW / bb.w, svgH / bb.h); // TODO correct??
+    let dx = -bb.x * scale;
+    let dy = -bb.y * scale;
 
     console.log('Resize by: ' + scale);
 
@@ -43,11 +43,12 @@ function drawTrayWithOverlay(targetElement, trayIdx) {
         //.attr('preserveAspectRatio', "xMinYMin slice")
         .attr("xlink:href", imgUrl);
 
-    var pathData = trayData.items[+trayIdx].path;
-    var svgPath = drawPath(svg, pathData, 'red');
+    let pathData = trayData.items[+trayIdx].path;
+    let svgPath = drawPath(svg, pathData, 'red');
 
     // transform the overlay to match the transformation of the image
-    svgPath.attr('transform', ' translate(' + dx + ',' + dy + ') scale(' + scale + ')')
+    let transform = 'translate(' + dx + ',' + dy + ') scale(' + scale + ')';
+    svgPath.attr('transform', transform)
 
 }
 
