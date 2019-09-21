@@ -2,17 +2,30 @@ function main() {
 
     var imgUrl = 'data/img/001.png';
 
-    var svgContainer = d3.select("#workspace")
+    var svg = d3.select("#workspace")
         .append("svg")
         .attr("width", "1280")
         .attr("height", "900");
-    svgContainer.append("image")
+    svg.append("image")
         .attr("xlink:href", imgUrl);
 
     console.log(jsonSample);
 
-    var pathData = jsonSample.items[0].polygon;
+    var pathData = jsonSample.items[0].path;
     console.log(pathData);
-    drawPath(svgContainer, pathData);
+    drawPath(svg, pathData, 'red');
+
+
+
+    // draw BBOX
+    var bb = jsonSample.bbox;
+    svg.append("rect")
+        .attr("stroke", "white")
+        .attr("stroke-width", "2px")
+        .attr("fill", "none")
+        .attr("x", bb.x)
+        .attr("y", bb.y)
+        .attr("width", bb.w)
+        .attr("height", bb.h);
 }
 

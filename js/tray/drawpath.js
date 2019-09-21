@@ -1,7 +1,7 @@
 /**
  * https://jsfiddle.net/GunnerSS/7fvtcLrw/
  */
-function drawPath(svgContainer, lineData)
+function drawPath(svgContainer, lineData, color)
 {
     var linePathGenerator = d3.line()
         .x(function(d) { return d[0]; })
@@ -13,10 +13,10 @@ function drawPath(svgContainer, lineData)
 
     var svgPath = svgContainer
         .append("path")
-        .attr("stroke", "red")
+        .attr("stroke", color)
         .attr("stroke-width", "2px")
         .attr("fill-opacity", ".4")
-        .attr("fill", "red");
+        .attr("fill", color);
 
     svgPath.attr("d", linePathGenerator(lineData));
 
