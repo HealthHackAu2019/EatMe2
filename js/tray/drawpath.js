@@ -3,10 +3,9 @@
  */
 function drawPath(svgContainer, lineData)
 {
-    var linePathGenerator = d3.svg.line()
+    var linePathGenerator = d3.line()
         .x(function(d) { return d[0]; })
-        .y(function(d) { return d[1]; })
-        .interpolate("linear");
+        .y(function(d) { return d[1]; });
 
     //check to see if SVG Path Mini-Language Instructions are generated
     linePathGenerator(lineData);
