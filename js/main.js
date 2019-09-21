@@ -33,8 +33,6 @@ function drawTrayWithOverlay(targetElement, trayIdx) {
     let dx = -bb.x * scale;
     let dy = -bb.y * scale;
 
-    console.log('Resize by: ' + scale);
-
     svg.append("image")
         .attr('width', origW * scale)
         .attr('height', origH * scale)
@@ -48,6 +46,7 @@ function drawTrayWithOverlay(targetElement, trayIdx) {
 
     // transform the overlay to match the transformation of the image
     let transform = 'translate(' + dx + ',' + dy + ') scale(' + scale + ')';
+    console.log('Transform: ' + transform);
     svgPath.attr('transform', transform)
 
 }
