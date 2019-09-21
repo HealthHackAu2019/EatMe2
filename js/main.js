@@ -1,8 +1,8 @@
-function main() {
+function main(el, tray_id) {
 
-    var imgUrl = 'data/img/001.png';
+    var imgUrl = 'data/img/' + tray_id + '.png';
 
-    var svg = d3.select("#workspace")
+    var svg = d3.select(el)
         .append("svg")
         .attr("width", "1280")
         .attr("height", "900");
@@ -11,7 +11,7 @@ function main() {
 
     console.log(jsonSample);
 
-    var pathData = jsonSample.items[0].path;
+    var pathData = jsonSample.items[ +tray_id ].path;
     console.log(pathData);
     drawPath(svg, pathData, 'red');
 
