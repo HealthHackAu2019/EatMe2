@@ -20,6 +20,7 @@ function drawPath(svgContainer, lineData, color)
 
     svgPath.attr("d", linePathGenerator(lineData));
 
-    // BTW: d3 can compute area too
+    return svgPath;
 
+    // BTW: d3 can compute area too
 }

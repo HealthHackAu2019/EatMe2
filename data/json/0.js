@@ -1,6 +1,4 @@
-// FIXME can't make ajax calls to local files...
-
-var jsonSample = {
+var tray_0 = {
     "id": 1,
     "bbox": {x: 220, y: 190, w: 760, h: 480},
     "items": [{
