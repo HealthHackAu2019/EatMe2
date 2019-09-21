@@ -1,20 +1,28 @@
-function main(el, tray_id) {
+/**
+ * Fetches the frame image and associated data from files in `/data`,
+ * then plots the image in given `targetElement`,
+ * scaling and translating so the tray fills the viewport
+ * and draws overlay based on data from JSON.
+ *
+ * @param targetElement the HTML host element to draw SVG in.
+ * @param trayIdx index number of the tray.
+ */
+function drawTrayWithOverlay(targetElement, trayIdx) {
 
-    var imgUrl = 'data/img/' + tray_id + '.png';
-    var trayData = window['tray_' + tray_id];
+    // svg size
+    const svgW = 400;
+    const svgH = 300;
+    // orig pic size
+    const origW = 1224;
+    const origH = 946;
+
+    var imgUrl = 'data/img/' + trayIdx + '.png';
+    var trayData = window['tray_' + trayIdx];
 
     // bounding box of tray
     var bb = trayData.bbox;
 
-    // svg size
-    var svgW = 400;
-    var svgH = 300;
-
-    // orig pic size
-    var origW = 1224;
-    var origH = 946;
-
-    var svg = d3.select(el)
+    var svg = d3.select(targetElement)
         .append("svg")
         .style('border', 'black solid')
         .attr("width", svgW)
@@ -35,21 +43,11 @@ function main(el, tray_id) {
         //.attr('preserveAspectRatio', "xMinYMin slice")
         .attr("xlink:href", imgUrl);
 
-    var pathData = trayData.items[+tray_id].path;
+    var pathData = trayData.items[+trayIdx].path;
     var svgPath = drawPath(svg, pathData, 'red');
 
     // transform the overlay to match the transformation of the image
     svgPath.attr('transform', ' translate(' + dx + ',' + dy + ') scale(' + scale + ')')
-
-    // // draw BBOX
-    // svg.append("rect")
-    //     .attr("stroke", "white")
-    //     .attr("stroke-width", "2px")
-    //     .attr("fill", "none")
-    //     .attr("x", bb.x)
-    //     .attr("y", bb.y)
-    //     .attr("width", bb.w)
-    //     .attr("height", bb.h);
 
 }
 
