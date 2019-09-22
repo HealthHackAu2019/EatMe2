@@ -6,6 +6,7 @@ import {
 import TrayCarousel from './TrayCarousel'
 import PatientInfo from './PatientInfo'
 import TrayStats from './TrayStats'
+import FoodStats from './FoodStats'
 import Plot from './Plot'
 // const items = [
 //   {
@@ -83,6 +84,7 @@ class TrayBrowser extends Component {
           {/*<Plot data={items[0]}/>*/}
         </Col>
       </Row>
+      <FoodStats data={images[activeIndex]} categories={categories}/>
       </div>      
     );
   }
