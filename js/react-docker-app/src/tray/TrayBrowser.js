@@ -5,6 +5,7 @@ import {
 } from 'reactstrap';
 import TrayCarousel from './TrayCarousel'
 import PatientInfo from './PatientInfo'
+import TrayStats from './TrayStats'
 import Plot from './Plot'
 // const items = [
 //   {
@@ -75,6 +76,7 @@ class TrayBrowser extends Component {
     return (
       <div>
       <PatientInfo data={images[activeIndex]} categories={categories}/>
+      <TrayStats data={images[activeIndex]} categories={categories}/>
       <Row>
         <Col sm={{size:6, offset:3}}>
           <TrayCarousel items={images} categories={categories} handleChange={this.handleChange}/>

@@ -30,6 +30,27 @@ for(var i=0; i < annotations.length; i++){
   max_area[cid - 1] = Math.max(max_area[cid - 1], annotations[i].area)
 }
 
+var kCal_info = d3.map(categories, e => e.id)
+console.log("KCal", kCal_info);
+function calculate_stats(el) {
+  var food_eaten = d3.mean(
+    el.annotations
+      .filter(e => e.category_id !== 15 && e.category_id !== 10)
+      .map(e => e.eaten)
+  )
+  food_eaten = !food_eaten || Number.isNaN(food_eaten) ? 100 : food_eaten;
+  
+  var kCal = d3.sum(
+    el.annotations
+      .filter(e => e.category_id !== 15 && e.category_id !== 10)
+      .map(e => (100 - e.eaten) / 100 * kCal_info['$' + e.category_id].KCal)
+  )
+  kCal = !kCal || Number.isNaN(kCal) ? 0 : kCal;
+  
+  el.stats = {food_eaten, kCal};
+  return(el)
+}
+
 var images_ = images.map(function(d, i) {
   return({
     id: d.id,
@@ -59,7 +80,7 @@ for(var i=0; i<annotations.length; i++){
   )
 }
 const masks_parsed = Object.keys(images_keys)
-  .map(function(e) {return(images_keys[e])})
+  .map(e => calculate_stats(images_keys[e]))
 
 // console.log(cats, annotations[0].category_id);
 

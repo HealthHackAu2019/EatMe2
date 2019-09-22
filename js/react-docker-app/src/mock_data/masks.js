@@ -15,82 +15,166 @@ const masks = {
     "year": "2019"
   },
   "categories": [
-    {
-      "id": 1,
-      "name": "Bread",
-      "supercategory": ""
-    },
-    {
-      "id": 2,
-      "name": "Dessert",
-      "supercategory": ""
-    },
-    {
-      "id": 3,
-      "name": "FreshFruit",
-      "supercategory": ""
-    },
-    {
-      "id": 4,
-      "name": "GreenVeg",
-      "supercategory": ""
-    },
-    {
-      "id": 5,
-      "name": "HotMain",
-      "supercategory": ""
-    },
-    {
-      "id": 6,
-      "name": "Juice",
-      "supercategory": ""
-    },
-    {
-      "id": 7,
-      "name": "MilkDrink",
-      "supercategory": ""
-    },
-    {
-      "id": 8,
-      "name": "OrangeVeg",
-      "supercategory": ""
-    },
-    {
-      "id": 9,
-      "name": "Other",
-      "supercategory": ""
-    },
-    {
-      "id": 10,
-      "name": "Plate",
-      "supercategory": ""
-    },
-    {
-      "id": 11,
-      "name": "SaladBowl",
-      "supercategory": ""
-    },
-    {
-      "id": 12,
-      "name": "Sandwich",
-      "supercategory": ""
-    },
-    {
-      "id": 13,
-      "name": "Soup",
-      "supercategory": ""
-    },
-    {
-      "id": 14,
-      "name": "Starch",
-      "supercategory": ""
-    },
-    {
-      "id": 15,
-      "name": "Tray",
-      "supercategory": ""
-    }
-  ],
+     {
+       "id": 1,
+       "name": "Bread",
+       "supercategory": "",
+ "Price": "0.10",
+ "KCal": "70",
+ "Protein": "4",
+ "Carb": "11",
+ "Vitamin P": "0.8",
+ "Vitamin S": "0.1"
+     },
+     {
+       "id": 2,
+       "name": "Dessert",
+       "supercategory": "",
+ "Price": "0.50",
+ "KCal": "140",
+ "Protein": "2.5",
+ "Carb": "10",
+ "Vitamin P": "0.9",
+ "Vitamin S": "0.6"
+     },
+     {
+       "id": 3,
+       "name": "FreshFruit",
+       "supercategory": "",
+ "Price": "0.7",
+ "KCal": "95",
+ "Protein": "4",
+ "Carb": "19",
+ "Vitamin P": "0.2",
+ "Vitamin S": "0.1"
+     },
+     {
+       "id": 4,
+       "name": "GreenVeg",
+       "supercategory": ""
+     },
+     {
+       "id": 5,
+       "name": "HotMain",
+       "supercategory": "",
+ "Price": "0.6",
+ "KCal": "31",
+ "Protein": "6",
+ "Carb": "2",
+ "Vitamin P": "0.2",
+ "Vitamin S": "0.1"
+     },
+     {
+       "id": 6,
+       "name": "Juice",
+       "supercategory": "",
+ "Price": "0.4",
+ "KCal": "50",
+ "Protein": "2",
+ "Carb": "10",
+ "Vitamin P": "0.1",
+ "Vitamin S": "0.1"
+     },
+     {
+       "id": 7,
+       "name": "MilkDrink",
+       "supercategory": "",
+ "Price": "",
+ "KCal": "",
+ "Protein": "",
+ "Carb": "",
+ "Vitamin P": "",
+ "Vitamin S": ""
+     },
+     {
+       "id": 8,
+       "name": "OrangeVeg",
+       "supercategory": "",
+ "Price": "0.8",
+ "KCal": "180",
+ "Protein": "6.6",
+ "Carb": "41",
+ "Vitamin P": "0.8",
+ "Vitamin S": "0.3"
+     },
+     {
+       "id": 9,
+       "name": "Other",
+       "supercategory": "",
+ "Price": "",
+ "KCal": "",
+ "Protein": "",
+ "Carb": "",
+ "Vitamin P": "",
+ "Vitamin S": ""
+     },
+     {
+       "id": 10,
+       "name": "Plate",
+       "supercategory": "",
+ "Price": "",
+ "KCal": "",
+ "Protein": "",
+ "Carb": "",
+ "Vitamin P": "",
+ "Vitamin S": ""
+     },
+     {
+       "id": 11,
+       "name": "SaladBowl",
+       "supercategory": "",
+ "Price": "1",
+ "KCal": "102",
+ "Protein": "2",
+ "Carb": "38",
+ "Vitamin P": "0.1",
+ "Vitamin S": "0.1"
+     },
+     {
+       "id": 12,
+       "name": "Sandwich",
+       "supercategory": "",
+ "Price": "1.2",
+ "KCal": "180",
+ "Protein": "5",
+ "Carb": "80",
+ "Vitamin P": "1.2",
+ "Vitamin S": "1.1"
+     },
+     {
+       "id": 13,
+       "name": "Soup",
+       "supercategory": "",
+ "Price": "0.9",
+ "KCal": "90",
+ "Protein": "6",
+ "Carb": "40",
+ "Vitamin P": "0.7",
+ "Vitamin S": "0.4"
+     },
+     {
+       "id": 14,
+       "name": "Starch",
+       "supercategory": "",
+ "Price": "0.9",
+ "KCal": "96",
+ "Protein": "4",
+ "Carb": "101",
+ "Vitamin P": "1.5",
+ "Vitamin S": "1.3"
+     },
+     {
+       "id": 15,
+       "name": "Tray",
+       "supercategory": "",
+ "Price": "",
+ "KCal": "",
+ "Protein": "",
+ "Carb": "",
+ "Vitamin P": "",
+ "Vitamin S": ""
+     }
+   ],
   "images": [
     {
       "coco_url": "",
