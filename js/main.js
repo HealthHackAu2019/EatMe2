@@ -130,6 +130,10 @@ function plotGraph() {
         .text(d => d.name);
 }
 
+/**
+ * Scan our data set and prepare data for the graph.
+ * @param data annotations data extracted from JSON in masks.js
+ */
 function makeLinks(data) {
     let cats = {};
     let links = [];
