@@ -13,10 +13,23 @@
     <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
     <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
 
+    <!-- D3 Sankey -->
+    <script src="https://unpkg.com/d3-array@1"></script>
+    <script src="https://unpkg.com/d3-collection@1"></script>
+    <script src="https://unpkg.com/d3-path@1"></script>
+    <script src="https://unpkg.com/d3-shape@1"></script>
+    <script src="https://unpkg.com/d3-sankey@0"></script>
+
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>-->
 
     <!-- TODO run a loop so we insert all data files in here -->
     <script src="data/json/0.js"></script>
+
+    <script>
+        window.exports = {};
+    </script>
+    <script src="js/react-docker-app/src/mock_data/fake_pt.js"></script>
+    <script src="js/react-docker-app/src/mock_data/masks.js"></script>
 
     <script src="js/tray/drawpath.js"></script>
     <script src="js/main.js"></script>
@@ -28,9 +41,15 @@
 
 <div id="workspace"></div>
 
+<div id="graph">
+
+</div>
+
 <script type="application/javascript">
 
     drawTrayWithOverlay("#workspace", 0);
+
+    plotGraph();
 
 </script>
 
