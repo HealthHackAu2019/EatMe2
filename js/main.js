@@ -2,6 +2,7 @@ function makeLinks(data) {
     let cats = {};
     let links = [];
 
+    // find maximums per category
     data.forEach(d => {
         if (!cats[d.category_id]) {
             cats[d.category_id] = {
@@ -15,6 +16,7 @@ function makeLinks(data) {
         }
     });
 
+    // sum up food eaten for each category
     data.forEach(d => {
         let eaten = cats[d.category_id].max - d.area;
         cats[d.category_id].eaten += eaten;
@@ -23,6 +25,7 @@ function makeLinks(data) {
 
     console.log(cats);
 
+    // create links from each food category to "patient" and "bin"
     for (let catIdx in cats) {
         let cat = cats[catIdx];
         links.push({
@@ -42,8 +45,10 @@ function makeLinks(data) {
 
 function plotGraph() {
 
+    // those weren't reliable data due to annotations mistakes etc.
     let ignored_cats = [1, 8, 9, 10, 12, 15];
 
+    // create nodes for each category
     let nodes = exports.masks.categories
         .filter(d => !ignored_cats.includes(d.id))
         .map(d => {
@@ -53,6 +58,7 @@ function plotGraph() {
             }
         });
 
+    // add Patient and Bin nodes
     nodes = nodes.concat([{
         id: "P",
         name: "Patient",
@@ -64,37 +70,44 @@ function plotGraph() {
     let links = makeLinks(exports.masks.annotations
         .filter(d => !ignored_cats.includes(d.category_id)));
 
+    // create graph
+    // see https://github.com/d3/d3-sankey
+    // https://observablehq.com/@d3/sankey-diagram
     const width = 800;
     const height = 400;
+
+    // viewing modes
     let edgeColor = 'output';
     let align = ['justified'];
 
-    const svg = d3.select("#graph")
-        .append("svg")
-        .attr("viewBox", [0, 0, width, height]);
-
-    const sankey = d3.sankey()
-    // .nodeAlign(d3[`sankey${align[0].toUpperCase()}${align.slice(1)}`])
-        .nodeWidth(15)
-        .nodePadding(10)
-        .nodeId(n => n.id)
-        .extent([[1, 5], [width - 1, height - 5]]);
-
-    let graph = sankey({
-        nodes: nodes,
-        links: links
-    });
-
+    // label formatter
     function format(d) {
         const f = d3.format(",.0f");
         return `${f(d)} TWh`;
     }
-
+    // color picker
     function color(name) {
         if (name === 'Bin') return 'red';
         if (name === 'Patient') return 'green';
         return d3.scaleOrdinal(d3.schemeCategory10)(name);
     }
+
+    // create Sankey Graph model
+    const sankey = d3.sankey()
+        // .nodeAlign(d3[`sankey${align[0].toUpperCase()}${align.slice(1)}`])
+        .nodeWidth(15)
+        .nodePadding(10)
+        .nodeId(n => n.id)
+        .extent([[1, 5], [width - 1, height - 5]])
+        ({
+            nodes: nodes,
+            links: links
+        });
+
+    // create svg elements
+    const svg = d3.select("#graph")
+        .append("svg")
+        .attr("viewBox", [0, 0, width, height]);
 
     svg.append("g")
         .attr("stroke", "#000")
