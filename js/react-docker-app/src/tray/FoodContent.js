@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Progress, Col, Toast, ToastHeader, ToastBody, Row} from 'reactstrap'
+import { Progress, Col, Card, ToastHeader, ToastBody, Row} from 'reactstrap'
 import map from '../mock_data/icon2label'
 
 
@@ -8,7 +8,7 @@ class FoodBar extends Component {
         const { icon, title, percent } = this.props
         console.log('data/img/icons/'+map[title])
         return (
-            <Toast>
+            <Card style={{width: '100%'}} >
                 <ToastHeader>
                     {title}
                 </ToastHeader>
@@ -26,7 +26,7 @@ class FoodBar extends Component {
                     </Col>
                     </Row>
                 </ToastBody>
-            </Toast>
+            </Card >
         )
     }
 }

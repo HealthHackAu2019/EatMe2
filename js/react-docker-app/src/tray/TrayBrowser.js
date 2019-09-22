@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   Col,
+  Container,
   Row
 } from 'reactstrap';
 import TrayCarousel from './TrayCarousel'
@@ -84,7 +85,12 @@ class TrayBrowser extends Component {
           {/*<Plot data={items[0]}/>*/}
         </Col>
       </Row>
+      <div
+      style={{
+        marginTop: '22px'
+      }}>
       <FoodStats data={images[activeIndex]} categories={categories}/>
+      </div>
       </div>      
     );
   }
