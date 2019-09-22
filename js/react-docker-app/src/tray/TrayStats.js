@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {
   Col,
-  Row,
-  Progress
+  Row
+  //Progress
 } from 'reactstrap';
 import * as d3 from 'd3'
-
+import {Progress} from 'react-sweet-progress'
+import "react-sweet-progress/lib/style.css";
 
 class TrayStats extends Component {
   constructor(props) {
@@ -18,12 +19,34 @@ class TrayStats extends Component {
     // console.log(stats, stats.kCal);
     return (
       <Row>
+      <Col>
+      Tray ID: {this.props.data.id}
+      </Col>
         <Col>
           <Row>
             <Col>
             <p style={{float:'right'}}>Food eaten: {Math.round(stats.food_eaten)}%</p>
             </Col> 
-            <Col><Progress value={stats.food_eaten} className="align-self-center"/></Col>
+            <Col>
+            <Progress
+              theme={{
+                success: {
+                  symbol: ' ',
+                  color: 'rgb(223, 105, 180)'
+                },
+                active: {
+                  symbol: '😀',
+                  color: '#fbc630'
+                },
+                default: {
+                  symbol: '😱',
+                  color: '#fbc630'
+                }
+              }}
+              percent={stats.food_eaten} className="align-self-center"
+              status='success'
+            />
+            </Col>
           </Row>
         </Col>
         <Col>

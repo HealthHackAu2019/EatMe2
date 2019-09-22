@@ -17,7 +17,7 @@ function drawTrayWithOverlay(targetElement, img, trayData, categories, width, he
     // svg size
     const svgW = width;
     const svgH = height;
-    console.log(svgW, svgH);
+    // console.log(svgW, svgH);
     // orig pic size
     const imgUrl = img.src;
     const origW = img.width;
@@ -61,17 +61,21 @@ function drawTrayWithOverlay(targetElement, img, trayData, categories, width, he
         .attr('y', dy)
         //.attr('preserveAspectRatio', "xMinYMin slice")
         .attr("xlink:href", imgUrl);
-
+      
+    if (!trayData || !trayData.length) {
+      return;
+    }
     // let pathData = trayData.items[0].path;
     // console.log(pathData);
     var colordict = d3.map(categories, e => e.id)
     var colorscale = (d) => {
-      if (d.category_id === 15 || d.category_id === 10 ) { // plates and trays
+      if (d.category_id === 13 || d.category_id === 14 ) { // plates and trays
         return 'black'
       }
       return colordict['$' + d.category_id].color
     }
-    console.log(trayData[0], colorscale(trayData[0]), colordict);
+    // console.log('tray', trayData[0]);
+    // console.log(trayData[0], colorscale(trayData[0]), colordict);
     let svgPath = drawPath(svg, trayData, colorscale);
     // 
     // // transform the overlay to match the transformation of the image
@@ -95,15 +99,15 @@ function drawPath(svgContainer, lineData, colorscale)
 
     //check to see if SVG Path Mini-Language Instructions are generated
     // linePathGenerator(lineData);
-    // lineData = lineData.filter(e => e.category_id === 15 || e.category_id === 10)
+    // lineData = lineData.filter(e => e.category_id === 13 || e.category_id === 14)
     var svgPath = svgContainer.selectAll('path')
         .data(lineData)
         .enter()
           .append("path")
           .attr("d", (d) => line(d.path))
           .attr("stroke", d => colorscale(d))
-          .attr("stroke-width", d => d.category_id === 15 || d.category_id === 10 ? "10px":"2px")
-          .attr("fill-opacity", d => d.category_id === 15 || d.category_id === 10 ? "0":"0.8")
+          .attr("stroke-width", d => d.category_id === 13 || d.category_id === 14 ? "10px":"2px")
+          .attr("fill-opacity", d => d.category_id === 13 || d.category_id === 14 ? "0":"0.8")
           .attr("fill", d => colorscale(d) === 'black'? null : colorscale(d));
           
     return svgPath;
@@ -142,7 +146,7 @@ class Plot extends Component{
   //     this.props.settings != nextProps.settings;
   // }
   componentDidUpdate(prevProps) {
-    console.log("did update", this.props.data.image.src)
+    // console.log("did update", this.props.data.image.src)
     // console.log(prevProps.size.width, this.props.size.width);
     if (prevProps.size.width == 0 || 
       prevProps.size.width != this.props.size.width) {
@@ -152,7 +156,7 @@ class Plot extends Component{
   }
   render() {
     // console.log(this.props.size);
-    console.log("render", this.props)
+    // console.log("render", this.props)
     return (<div ref={el => this.el = el} style={{width:this.props.width, height:'400px'}}></div>);
   }
 }

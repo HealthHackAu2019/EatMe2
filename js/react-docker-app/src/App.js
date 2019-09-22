@@ -15,11 +15,9 @@ import {
 } from 'reactstrap';
 import TrayBrowser from './tray/TrayBrowser'
 import './App.css'
-import {masks} from './mock_data/masks'
-import {pt} from './mock_data/fake_pt'
+import {masks} from './real_data/masks'
+import {pt} from './real_data/fake_pt'
 import * as d3 from "d3";
-
-// const {pt} = fake_pt
 const {images, categories, annotations} = masks
 
 const cats = d3.range(categories.length).map(function(d) {return 0})
@@ -33,16 +31,21 @@ for(var i=0; i < annotations.length; i++){
 var kCal_info = d3.map(categories, e => e.id)
 console.log("KCal", kCal_info);
 function calculate_stats(el) {
-  var food_eaten = d3.mean(
-    el.annotations
-      .filter(e => e.category_id !== 15 && e.category_id !== 10)
-      .map(e => e.eaten)
-  )
-  food_eaten = !food_eaten || Number.isNaN(food_eaten) ? 100 : food_eaten;
+  var categories_eaten = categories
+    .filter(e => e.id !== 13 && e.id !== 14)
+    .map(e => {
+      var cid = e.id
+      var a = el.annotations
+        .filter(e => e.category_id === cid)
+      
+      return a.length > 0? a[0].eaten : 100
+    })
+  var food_eaten = d3.mean(categories_eaten)
+  food_eaten = food_eaten === undefined || Number.isNaN(food_eaten) ? 100 : food_eaten;
   
   var kCal = d3.sum(
     el.annotations
-      .filter(e => e.category_id !== 15 && e.category_id !== 10)
+      .filter(e => e.category_id !== 13 && e.category_id !== 14)
       .map(e => (100 - e.eaten) / 100 * kCal_info['$' + e.category_id].KCal)
   )
   kCal = !kCal || Number.isNaN(kCal) ? 0 : kCal;
@@ -65,6 +68,9 @@ var images_keys = d3.map(images_, function(d){return(d.id)})
 
 for(var i=0; i<annotations.length; i++){
   var a = annotations[i]
+  // if (!images_keys["$"+a.image_id]) {
+  //   continue;
+  // }
   var path = a.segmentation[0]
   var xpath = a.segmentation[0].filter((e,i) => i%2 === 0)
   var eaten = 100 - ((a.area/max_area[ a.category_id-1 ]) * 100)
@@ -82,8 +88,7 @@ for(var i=0; i<annotations.length; i++){
 const masks_parsed = Object.keys(images_keys)
   .map(e => calculate_stats(images_keys[e]))
 
-// console.log(cats, annotations[0].category_id);
-
+// console.log(masks_parsed[31]);
 const categories_ = masks.categories
   .map(function(e){
     e.count = cats[e.id -1];
@@ -128,7 +133,7 @@ class App extends Component {
                     </Collapse>
                 </Navbar>
                 <Container>
-                  <TrayBrowser images={masks_parsed.filter((e,i) => i > 100 && i < 125)} categories={categories_}/>
+                  <TrayBrowser images={masks_parsed.filter((e,i) => i >= 0)} categories={categories_}/>
                 </Container>
             </div>
         );
