@@ -1,48 +1,11 @@
-function makeLinks(data) {
-    let cats = {};
-    let links = [];
-
-    // find maximums per category
-    data.forEach(d => {
-        if (!cats[d.category_id]) {
-            cats[d.category_id] = {
-                id: d.category_id,
-                max: d.area,
-                eaten: 0,
-                waste: 0
-            }
-        } else {
-            cats[d.category_id].max = Math.max(d.area, cats[d.category_id].max)
-        }
-    });
-
-    // sum up food eaten for each category
-    data.forEach(d => {
-        let eaten = cats[d.category_id].max - d.area;
-        cats[d.category_id].eaten += eaten;
-        cats[d.category_id].waste += d.area;
-    });
-
-    console.log(cats);
-
-    // create links from each food category to "patient" and "bin"
-    for (let catIdx in cats) {
-        let cat = cats[catIdx];
-        links.push({
-            source: "C" + catIdx,
-            target: "P",
-            value: cat.eaten
-        });
-        links.push({
-            source: "C" + catIdx,
-            target: "B",
-            value: cat.waste
-        });
-    }
-
-    return links;
-}
-
+/**
+ * Plots flows from food categories to bin or patient.
+ * The graph we use is called Sankey.
+ *
+ * See:
+ * https://github.com/d3/d3-sankey
+ * https://observablehq.com/@d3/sankey-diagram
+ */
 function plotGraph() {
 
     // those weren't reliable data due to annotations mistakes etc.
@@ -71,8 +34,6 @@ function plotGraph() {
         .filter(d => !ignored_cats.includes(d.category_id)));
 
     // create graph
-    // see https://github.com/d3/d3-sankey
-    // https://observablehq.com/@d3/sankey-diagram
     const width = 800;
     const height = 400;
 
@@ -167,6 +128,51 @@ function plotGraph() {
         .attr("dy", "0.35em")
         .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
         .text(d => d.name);
+}
+
+function makeLinks(data) {
+    let cats = {};
+    let links = [];
+
+    // find maximums per category
+    data.forEach(d => {
+        if (!cats[d.category_id]) {
+            cats[d.category_id] = {
+                id: d.category_id,
+                max: d.area,
+                eaten: 0,
+                waste: 0
+            }
+        } else {
+            cats[d.category_id].max = Math.max(d.area, cats[d.category_id].max)
+        }
+    });
+
+    // sum up food eaten for each category
+    data.forEach(d => {
+        let eaten = cats[d.category_id].max - d.area;
+        cats[d.category_id].eaten += eaten;
+        cats[d.category_id].waste += d.area;
+    });
+
+    console.log(cats);
+
+    // create links from each food category to "patient" and "bin"
+    for (let catIdx in cats) {
+        let cat = cats[catIdx];
+        links.push({
+            source: "C" + catIdx,
+            target: "P",
+            value: cat.eaten
+        });
+        links.push({
+            source: "C" + catIdx,
+            target: "B",
+            value: cat.waste
+        });
+    }
+
+    return links;
 }
 
 
