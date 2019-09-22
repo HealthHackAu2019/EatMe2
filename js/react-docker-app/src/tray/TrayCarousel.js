@@ -82,7 +82,9 @@ class TrayCarousel extends Component {
           onExited={this.onExited}
           key={item.id}
         >
-        <Plot data={item} categories={this.props.categories}/>
+        <Col sm={{size:8, offset:2}}>
+          <Plot data={item} categories={this.props.categories}/>
+        </Col>
         </CarouselItem>
       );
     });

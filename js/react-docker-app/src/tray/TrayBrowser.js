@@ -79,7 +79,7 @@ class TrayBrowser extends Component {
       <PatientInfo data={images[activeIndex]} categories={categories}/>
       <TrayStats data={images[activeIndex]} categories={categories}/>
       <Row>
-        <Col sm={{size:6, offset:3}}>
+        <Col sm={{size:10, offset:1}}>
           <TrayCarousel items={images} categories={categories} handleChange={this.handleChange}/>
           {/*<Plot data={items[0]}/>*/}
         </Col>

@@ -92,7 +92,7 @@ const categories_ = masks.categories
   })
   .filter(function(e) {
     return(e.name != 'Tray' && e.name != 'Plate' && e.count != 0)
-  }).map(function(e,i){e.color = d3.schemeSet3[i]; return(e)})
+  }).map(function(e,i){e.color = d3.schemeCategory10[i % 10]; return(e)})
 
 class App extends Component {
     constructor(props) {
@@ -128,7 +128,7 @@ class App extends Component {
                     </Collapse>
                 </Navbar>
                 <Container>
-                  <TrayBrowser images={masks_parsed.filter((e,i) => i < 25)} categories={categories_}/>
+                  <TrayBrowser images={masks_parsed.filter((e,i) => i > 100 && i < 125)} categories={categories_}/>
                 </Container>
             </div>
         );

@@ -29,7 +29,7 @@ class TrayStats extends Component {
         <Col>
           <Row>
             <Col>
-            <p style={{float:'right'}}>kCal wasted: {Math.round(+stats.kCal)} kCal</p>
+            <p>kCal wasted: {Math.round(+stats.kCal)} kCal</p>
             </Col>             
           </Row>
         </Col>
