@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {
   Col,
-  Row,
-  Progress
+  Row
 } from 'reactstrap';
 import * as d3 from 'd3'
+import Progress from './FoodContent'
 
 
 class FoodStats extends Component {
@@ -23,9 +23,14 @@ class FoodStats extends Component {
           .filter(e => e.category_id === cid)
         
         var pct = a.length > 0? a[0].eaten : 100;
+        console.log('idx',e)
         return(
           <Col sm={6}>
-            <p>{e.name}: {pct}</p>
+            <Progress 
+              title={e.name}
+              percent={pct}
+              
+              />
           </Col>
         )
       })
