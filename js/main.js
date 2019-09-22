@@ -132,6 +132,11 @@ function plotGraph() {
 
 /**
  * Scan our data set and prepare data for the graph.
+ * We assume the reference amount is the maximum over whole data set.
+ *
+ * Then we compare every plate amount to the maximum and see how much was eaten.
+ * Of course this is not very accurate because we're only looking at area, not volume or weight.
+ *
  * @param data annotations data extracted from JSON in masks.js
  */
 function makeLinks(data) {
