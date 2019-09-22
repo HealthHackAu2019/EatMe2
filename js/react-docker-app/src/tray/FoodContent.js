@@ -8,7 +8,7 @@ class FoodBar extends Component {
         const { icon, title, percent } = this.props
         console.log('data/img/icons/'+map[title])
         return (
-            <Card style={{width: '100%'}} >
+            <Card style={{width: '100%', marginBottom: '10px'}} >
                 <ToastHeader>
                     {title}
                 </ToastHeader>
@@ -20,7 +20,6 @@ class FoodBar extends Component {
                     <Col sm={10} style={{ display: 'flex', flexDirection: 'column',  justifyContent: 'center'}}>
                         <Progress 
                             value={percent}
-                            color="green"
                             // type="circle"
                         />
                     </Col>
