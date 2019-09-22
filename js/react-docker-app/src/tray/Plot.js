@@ -88,21 +88,22 @@ function drawPath(svgContainer, lineData, colorscale)
     var line = d3.line()
         .x(function(d) { return d[0] })//.filter((e, i) => i%2 === 0); })
         .y(function(d) { return d[1] })//.filter((e, i) => i%2 === 1); })
-        .curve(d3.curveLinear);
+        .curve(d3.curveLinearClosed)
+        
     
     // var color = d3.
 
     //check to see if SVG Path Mini-Language Instructions are generated
     // linePathGenerator(lineData);
-
+    // lineData = lineData.filter(e => e.category_id === 15 || e.category_id === 10)
     var svgPath = svgContainer.selectAll('path')
         .data(lineData)
         .enter()
           .append("path")
           .attr("d", (d) => line(d.path))
           .attr("stroke", d => colorscale(d))
-          .attr("stroke-width", "2px")
-          .attr("fill-opacity", ".4")
+          .attr("stroke-width", d => d.category_id === 15 || d.category_id === 10 ? "10px":"2px")
+          .attr("fill-opacity", d => d.category_id === 15 || d.category_id === 10 ? "0":"0.8")
           .attr("fill", d => colorscale(d) === 'black'? null : colorscale(d));
           
     return svgPath;

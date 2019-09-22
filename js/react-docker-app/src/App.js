@@ -27,7 +27,28 @@ const max_area = d3.range(categories.length).map(function(d) {return 0})
 for(var i=0; i < annotations.length; i++){
   var cid = annotations[i].category_id
   cats[cid - 1] ++
-  max_area[cid - 1] = Math.max(max_area[cid - 1], cid.area)
+  max_area[cid - 1] = Math.max(max_area[cid - 1], annotations[i].area)
+}
+
+var kCal_info = d3.map(categories, e => e.id)
+console.log("KCal", kCal_info);
+function calculate_stats(el) {
+  var food_eaten = d3.mean(
+    el.annotations
+      .filter(e => e.category_id !== 15 && e.category_id !== 10)
+      .map(e => e.eaten)
+  )
+  food_eaten = !food_eaten || Number.isNaN(food_eaten) ? 100 : food_eaten;
+  
+  var kCal = d3.sum(
+    el.annotations
+      .filter(e => e.category_id !== 15 && e.category_id !== 10)
+      .map(e => (100 - e.eaten) / 100 * kCal_info['$' + e.category_id].KCal)
+  )
+  kCal = !kCal || Number.isNaN(kCal) ? 0 : kCal;
+  
+  el.stats = {food_eaten, kCal};
+  return(el)
 }
 
 var images_ = images.map(function(d, i) {
@@ -46,7 +67,7 @@ for(var i=0; i<annotations.length; i++){
   var a = annotations[i]
   var path = a.segmentation[0]
   var xpath = a.segmentation[0].filter((e,i) => i%2 === 0)
-  var eaten = (a.area/max_area[ a.category_id-1 ]) * 100
+  var eaten = 100 - ((a.area/max_area[ a.category_id-1 ]) * 100)
   path = xpath.map((e,i) => [path[i*2], path[i*2 + 1]])
   images_keys["$"+a.image_id].annotations.push(
     {
@@ -59,7 +80,7 @@ for(var i=0; i<annotations.length; i++){
   )
 }
 const masks_parsed = Object.keys(images_keys)
-  .map(function(e) {return(images_keys[e])})
+  .map(e => calculate_stats(images_keys[e]))
 
 // console.log(cats, annotations[0].category_id);
 
@@ -71,7 +92,7 @@ const categories_ = masks.categories
   })
   .filter(function(e) {
     return(e.name != 'Tray' && e.name != 'Plate' && e.count != 0)
-  }).map(function(e,i){e.color = d3.schemeSet3[i]; return(e)})
+  }).map(function(e,i){e.color = d3.schemeCategory10[i % 10]; return(e)})
 
 class App extends Component {
     constructor(props) {
@@ -107,7 +128,7 @@ class App extends Component {
                     </Collapse>
                 </Navbar>
                 <Container>
-                  <TrayBrowser images={masks_parsed.filter((e,i) => i < 25)} categories={categories_}/>
+                  <TrayBrowser images={masks_parsed.filter((e,i) => i > 100 && i < 125)} categories={categories_}/>
                 </Container>
             </div>
         );

@@ -4,11 +4,14 @@ import {
   Row,
   Progress
 } from 'reactstrap';
+import * as d3 from 'd3'
+
 
 class PatientInfo extends Component {
   constructor(props) {
     super(props);
   }
+  
 
   render() {
     const {data} = this.props
@@ -21,12 +24,7 @@ class PatientInfo extends Component {
       Patient ID: {data.patient.patient_id}
       </Col>
       <Col>
-      <Row>
-        <Col>
-        <p style={{float:'right'}}>Food eaten: {data.food_eaten}%</p>
-        </Col> 
-        <Col><Progress value={data.food_eaten} className="align-self-center"/></Col>
-      </Row>
+      Ward: {data.patient.Ward}
       </Col>
       <Col>
       <p>Diet: {data.patient["Diet Code"]}</p>

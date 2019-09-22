@@ -5,3 +5,8 @@
 .navbar-brand>img {
   padding: 7px 14px;
 }
+
+.carousel.slide {
+  background: #AAA;
+  height: 400px;
+}

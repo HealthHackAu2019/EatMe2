@@ -75,7 +75,6 @@ class TrayCarousel extends Component {
     var next_idx = activeIndex === this.items.length - 1 ? 0 : activeIndex + 1;
     console.log("idx", [prev_idx, activeIndex, next_idx]);
     const slides = this.items
-      .filter((e,i) => [prev_idx, activeIndex, next_idx].indexOf(i) >= 0)
       .map((item) => {
       return (
         <CarouselItem
@@ -83,7 +82,9 @@ class TrayCarousel extends Component {
           onExited={this.onExited}
           key={item.id}
         >
-        <Plot data={item} categories={this.props.categories}/>
+        <Col sm={{size:8, offset:2}}>
+          <Plot data={item} categories={this.props.categories}/>
+        </Col>
         </CarouselItem>
       );
     });
