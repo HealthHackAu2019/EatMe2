@@ -27,7 +27,7 @@ const max_area = d3.range(categories.length).map(function(d) {return 0})
 for(var i=0; i < annotations.length; i++){
   var cid = annotations[i].category_id
   cats[cid - 1] ++
-  max_area[cid - 1] = Math.max(max_area[cid - 1], cid.area)
+  max_area[cid - 1] = Math.max(max_area[cid - 1], annotations[i].area)
 }
 
 var images_ = images.map(function(d, i) {
@@ -46,7 +46,7 @@ for(var i=0; i<annotations.length; i++){
   var a = annotations[i]
   var path = a.segmentation[0]
   var xpath = a.segmentation[0].filter((e,i) => i%2 === 0)
-  var eaten = (a.area/max_area[ a.category_id-1 ]) * 100
+  var eaten = 100 - ((a.area/max_area[ a.category_id-1 ]) * 100)
   path = xpath.map((e,i) => [path[i*2], path[i*2 + 1]])
   images_keys["$"+a.image_id].annotations.push(
     {
