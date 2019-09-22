@@ -11,7 +11,7 @@ const maptmp = [{loc: 'bread.svg', name: 'Bread'},
     {loc: 'pc-fruit.svg', name: 'Other'},
     {loc: 'salad-bowl.svg', name: 'SaladBowl'},
     {loc: 'sandwich.svg', name: 'Sandwich'},
-    {loc: 'soup.svg', name: 'Soup'},
+    {loc: 'broth.svg', name: 'Soup'},
     {loc: 'starch.svg', name: 'Starch'}]
 
 const map = _.reduce(maptmp, (obj,e)=>{

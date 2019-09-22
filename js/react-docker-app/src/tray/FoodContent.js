@@ -13,15 +13,15 @@ class FoodBar extends Component {
                     <h7> {title} </h7>
                 </Row>
                 <Row>
+                    <Col sm={2}>
+                        <img src={'data/img/icons/'+map[title]}/>
+                    </Col>
                     <Col sm={10}>
                     <Progress 
                         value={percent}
                         color="green"
                         // type="circle"
                     />
-                    </Col>
-                    <Col sm={2}>
-                        <img src={'data/img/icons/'+map[title]}/>
                     </Col>
                 </Row>
             </Col>
