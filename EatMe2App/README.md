@@ -1,5 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-![Website preview][preview.png]
+
+![Website preview](/EatMe2App/preview.png?raw=true "App Preview")
 
 ## Dockerization and deployment
 
